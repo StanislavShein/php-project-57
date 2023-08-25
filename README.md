@@ -4,11 +4,14 @@ A Task Manager is a task management system similar to http://www.redmine.org/. I
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/StanislavShein/php-project-57/workflows/hexlet-check/badge.svg)](https://github.com/StanislavShein/php-project-57/actions)
+<<<<<<< HEAD
 [![tests-linter-check](https://github.com/StanislavShein/php-project-57/actions/workflows/tests-linter-check.yml/badge.svg)](https://github.com/StanislavShein/php-project-57/actions/workflows/tests-linter-check.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/581c1ca3975b1b9cb350/maintainability)](https://codeclimate.com/github/StanislavShein/php-project-57/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/581c1ca3975b1b9cb350/test_coverage)](https://codeclimate.com/github/StanislavShein/php-project-57/test_coverage)
 
 
+=======
+>>>>>>> 403598ca48195bc892a0b7de83aed18bc8057f49
 
 
 ### Requirements
