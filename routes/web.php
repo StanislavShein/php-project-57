@@ -15,5 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('main');
 
+Route::get('/tasks', function () {
+    return view('tasks');
+})->name('tasks');
+
+Route::get('/task_statuses', function () {
+    return view('task_statuses');
+})->name('task_statuses');
+
+Route::get('/labels', function () {
+    return view('labels');
+})->name('labels');
