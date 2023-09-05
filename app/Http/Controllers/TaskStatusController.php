@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskStatusController extends Controller
 {
@@ -22,9 +23,14 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
         $taskStatus = new TaskStatus();
         
         return view('task_statuses.create', compact('taskStatus'));
+
+        
     }
 
     /**
@@ -45,7 +51,7 @@ class TaskStatusController extends Controller
      */
     public function show(TaskStatus $taskStatus)
     {
-        return redirect()->route('task_statuses.index');
+        // return redirect()->route('task_statuses.index');
     }
 
     /**
@@ -61,6 +67,10 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
         $data = $request->input();
         $taskStatus->fill($data);
         $taskStatus->save();
