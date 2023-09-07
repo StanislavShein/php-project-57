@@ -51,7 +51,11 @@ class TaskStatusController extends Controller
      */
     public function show(TaskStatus $taskStatus)
     {
-        // return redirect()->route('task_statuses.index');
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+        
+        return redirect()->route('task_statuses.index');
     }
 
     /**
@@ -59,6 +63,10 @@ class TaskStatusController extends Controller
      */
     public function edit(TaskStatus $taskStatus)
     {
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
         return view('task_statuses.edit', compact('taskStatus'));
     }
 
@@ -83,6 +91,10 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
         $taskStatus->delete();
 
         return redirect()->route('task_statuses.index');

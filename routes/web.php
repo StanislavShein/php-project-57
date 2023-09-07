@@ -16,8 +16,8 @@ use App\Http\Controllers\TaskStatusController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('main');
+})->name('main');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
