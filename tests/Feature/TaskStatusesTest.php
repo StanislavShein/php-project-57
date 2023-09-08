@@ -7,9 +7,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TaskStatusesTest extends TestCase
 {
+    use DatabaseTransactions;
+
     private $user;
     private $taskStatus;
 
@@ -18,7 +21,6 @@ class TaskStatusesTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->taskStatus = TaskStatus::factory()->create();
-
     }
 
     public function testIndex(): void
@@ -48,7 +50,7 @@ class TaskStatusesTest extends TestCase
 
         $response->assertForbidden();
     }
-    
+
     public function testEditByUser(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.edit', $this->taskStatus));
@@ -62,7 +64,7 @@ class TaskStatusesTest extends TestCase
 
         $response->assertForbidden();
     }
-    
+
     public function testDestroyByUser(): void
     {
         $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $this->taskStatus));

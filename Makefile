@@ -1,6 +1,9 @@
 start:
 	php artisan serve --host=0.0.0.0 --port=$(PORT)
 
+migrate:
+	php artisan migrate:fresh --force --seed
+
 install:
 	composer install
 
@@ -10,5 +13,11 @@ validate:
 lint:
 	composer exec --verbose phpcs -- --standard=PSR12 app routes tests
 
+lint-fix:
+	composer exec phpcbf -- --standard=PSR12 app routes tests
+
+test:
+	php artisan test
+
 test-coverage:
-	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+	XDEBUG_MODE=coverage php artisan test --coverage-clover build/logs/clover.xml
