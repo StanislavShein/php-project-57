@@ -37,7 +37,24 @@ return [
         'hello' => 'Привет от Хекслета',
         'about' => 'Это простой менеджер задач на Laravel',
         'click' => 'Нажми меня',
-    ]
+    ],
+    'tasks' => [
+        'index_header' => 'Задачи',
+        'id' => 'ID',
+        'status' => 'Статус',
+        'name' => 'Имя',
+        'creator' => 'Автор',
+        'executor' => 'Исполнитель',
+        'created_at' => 'Дата создания',
+        'actions' => 'Действия',
+        'create' => 'Создать',
+        'create_header' => 'Создание задачи',
+        'description' => 'Описание',
+        'labels' => 'Метки',
+        'create' => 'Создать',
+
+
+    ],
     
     
 
