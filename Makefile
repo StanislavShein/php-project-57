@@ -5,7 +5,6 @@ setup:
 	cp -n .env.example .env || true
 	composer install
 	php artisan key:generate
-	npm run dev
 
 migrate:
 	php artisan migrate:fresh --force --seed
