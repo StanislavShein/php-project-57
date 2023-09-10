@@ -1,6 +1,12 @@
 start:
 	php artisan serve --host=0.0.0.0 --port=$(PORT)
 
+setup:
+	cp -n .env.example .env || true
+	composer install
+	php artisan key:generate
+	make migrate
+
 migrate:
 	php artisan migrate:fresh --force --seed
 

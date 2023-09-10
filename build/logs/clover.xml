@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1694184172">
-  <project timestamp="1694184172">
+<coverage generated="1694369212">
+  <project timestamp="1694369212">
     <file name="/Users/stanislavshein/git/php-project-57/app/Console/Kernel.php">
       <class name="App\Console\Kernel" namespace="global">
         <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="5" coveredelements="3"/>
@@ -273,6 +273,34 @@
       <line num="58" type="stmt" count="1"/>
       <metrics loc="61" ncloc="52" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="20" coveredelements="20"/>
     </file>
+    <file name="/Users/stanislavshein/git/php-project-57/app/Http/Controllers/TaskController.php">
+      <class name="App\Http\Controllers\TaskController" namespace="global">
+        <metrics complexity="8" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="22" coveredelements="0"/>
+      </class>
+      <line num="14" type="method" name="index" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="16" type="stmt" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <line num="24" type="method" name="create" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="31" type="stmt" count="0"/>
+      <line num="37" type="method" name="store" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="50" type="method" name="show" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="53" type="stmt" count="0"/>
+      <line num="58" type="method" name="edit" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="61" type="stmt" count="0"/>
+      <line num="66" type="method" name="update" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="69" type="stmt" count="0"/>
+      <line num="74" type="method" name="destroy" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <metrics loc="79" ncloc="54" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="0" elements="22" coveredelements="0"/>
+    </file>
     <file name="/Users/stanislavshein/git/php-project-57/app/Http/Controllers/TaskStatusController.php">
       <class name="App\Http\Controllers\TaskStatusController" namespace="global">
         <metrics complexity="12" methods="7" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="14" elements="34" coveredelements="17"/>
@@ -430,6 +458,12 @@
       <line num="21" type="stmt" count="2"/>
       <metrics loc="24" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
     </file>
+    <file name="/Users/stanislavshein/git/php-project-57/app/Models/Task.php">
+      <class name="App\Models\Task" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="20" ncloc="20" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
     <file name="/Users/stanislavshein/git/php-project-57/app/Models/TaskStatus.php">
       <class name="App\Models\TaskStatus" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -513,6 +547,6 @@
       <line num="15" type="stmt" count="6"/>
       <metrics loc="18" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
-    <metrics files="42" loc="1506" ncloc="1114" classes="30" methods="54" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="206" coveredstatements="147" elements="260" coveredelements="177"/>
+    <metrics files="44" loc="1605" ncloc="1188" classes="31" methods="61" coveredmethods="30" conditionals="0" coveredconditionals="0" statements="221" coveredstatements="147" elements="282" coveredelements="177"/>
   </project>
 </coverage>
