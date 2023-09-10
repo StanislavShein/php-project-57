@@ -3,8 +3,11 @@ start:
 
 setup:
 	cp -n .env.example .env || true
+	touch database/database.sqlite
 	composer install
+	npm ci
 	php artisan key:generate
+	npm run build
 
 migrate:
 	php artisan migrate:fresh --force --seed
