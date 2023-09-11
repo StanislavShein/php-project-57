@@ -28,14 +28,19 @@
                     @foreach ($tasks as $task)
                     <tr class="border-b border-dashed text-left">
                         <td>{{ $task->id }}</td>
-                        <td>{{ $task->status_id }}</td>
+                        <td>{{ $task->status->name }}</td>
                         <td>
-                            <a class="text-blue-600 hover:text-blue-900" href="/">{{ $task->name }}</a>
+                            <a class="text-blue-600 hover:text-blue-900" href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a>
                         </td>
-                        <td>{{ $task->created_by_id }}</td>
-                        <td>{{ $task->assigned_to_id}}</td>
+                        <td>{{ $task->creator->name }}</td>
+                        <td>{{ $task->executor->name}}</td>
                         <td>{{ $task->created_at }}</td>
-                        <td>Удалить / Изменить</td>
+                        @if (Auth::user())
+                            <td>
+                                <a href="{{ route('tasks.destroy', $task->id) }}" data-confirm="{{ __('layouts.tasks.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.tasks.delete')}}</a>
+                                <a href="{{ route('tasks.edit', $task) }}" class=" text-blue-600 hover:text-blue-900">{{ __('layouts.tasks.edit')}}</a>
+                            </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

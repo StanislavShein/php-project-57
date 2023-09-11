@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Taskstatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +29,10 @@ class TaskController extends Controller
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
         $task = new Task();
+        $statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
 
-        return view('tasks.create', compact('task'));
+        return view('tasks.create', compact('task', 'statuses', 'users'));
     }
 
     /**
@@ -49,7 +53,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        return view('tasks.show', compact('task'));
     }
 
     /**
@@ -57,7 +61,14 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
+        $statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+
+        return view('tasks.edit', compact('task', 'statuses', 'users'));
     }
 
     /**
@@ -65,7 +76,15 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
+        $data = $request->input();
+        $task->fill($data);
+        $task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -73,6 +92,12 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
+        $task->delete();
+
+        return redirect()->route('tasks.index');
     }
 }
