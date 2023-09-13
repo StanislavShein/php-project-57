@@ -29,42 +29,42 @@ class TaskStatusesTest extends TestCase
         $response->assertOk();
     }
 
-    public function testCreateByUnknown(): void
+    public function testForbiddenCreateByUnknown(): void
     {
         $response = $this->get(route('task_statuses.create'));
 
         $response->assertForbidden();
     }
 
-    public function testCreateByUser(): void
+    public function testAllowedCreateByUser(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.create'));
 
         $response->assertOk();
     }
 
-    public function testEditByUnknown(): void
+    public function testForbiddenEditByUnknown(): void
     {
         $response = $this->get(route('task_statuses.edit', $this->taskStatus));
 
         $response->assertForbidden();
     }
 
-    public function testEditByUser(): void
+    public function testAllowedEditByUser(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.edit', $this->taskStatus));
 
         $response->assertOk();
     }
 
-    public function testDestroyByUnknown(): void
+    public function testForbiddenDestroyByUnknown(): void
     {
         $response = $this->delete(route('task_statuses.destroy', $this->taskStatus));
 
         $response->assertForbidden();
     }
 
-    public function testDestroyByUser(): void
+    public function testAllowedDestroyByUser(): void
     {
         $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $this->taskStatus));
 

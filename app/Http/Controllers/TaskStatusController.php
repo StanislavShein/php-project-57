@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskStatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $taskStatuses = TaskStatus::orderBy('id', 'asc')->paginate();
@@ -18,9 +15,6 @@ class TaskStatusController extends Controller
         return view('task_statuses.index', compact('taskStatuses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         if (Auth::guest()) {
@@ -31,9 +25,6 @@ class TaskStatusController extends Controller
         return view('task_statuses.create', compact('taskStatus'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->input();
@@ -44,9 +35,6 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(TaskStatus $taskStatus)
     {
         if (Auth::guest()) {
@@ -55,9 +43,6 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(TaskStatus $taskStatus)
     {
         if (Auth::guest()) {
@@ -67,9 +52,6 @@ class TaskStatusController extends Controller
         return view('task_statuses.edit', compact('taskStatus'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, TaskStatus $taskStatus)
     {
         if (Auth::guest()) {
@@ -83,13 +65,14 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(TaskStatus $taskStatus)
     {
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
+        if ($taskStatus->task()->exists()) {
+            return back();
         }
 
         $taskStatus->delete();

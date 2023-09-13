@@ -37,8 +37,10 @@
                         <td>{{ $task->created_at }}</td>
                         @if (Auth::user())
                             <td>
-                                <a href="{{ route('tasks.destroy', $task->id) }}" data-confirm="{{ __('layouts.tasks.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.tasks.delete')}}</a>
-                                <a href="{{ route('tasks.edit', $task) }}" class=" text-blue-600 hover:text-blue-900">{{ __('layouts.tasks.edit')}}</a>
+                                @if (Auth::user()->id === $task->creator->id)
+                                    <a href="{{ route('tasks.destroy', $task->id) }}" data-confirm="{{ __('layouts.tasks.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.tasks.delete')}}</a>
+                                @endif
+                                    <a href="{{ route('tasks.edit', $task) }}" class=" text-blue-600 hover:text-blue-900">{{ __('layouts.tasks.edit')}}</a>
                             </td>
                         @endif
                     </tr>
