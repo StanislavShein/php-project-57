@@ -12,9 +12,6 @@ setup:
 migrate:
 	php artisan migrate:fresh --force --seed
 
-install:
-	composer install
-
 validate:
 	composer validate
 

@@ -20,6 +20,7 @@ class TaskStatusController extends Controller
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
+
         $taskStatus = new TaskStatus();
 
         return view('task_statuses.create', compact('taskStatus'));
@@ -40,6 +41,7 @@ class TaskStatusController extends Controller
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
+        
         return redirect()->route('task_statuses.index');
     }
 

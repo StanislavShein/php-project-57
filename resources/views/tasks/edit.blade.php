@@ -14,6 +14,7 @@
                 <div class="mt-2 text-black">
                     {{ Form::text('name') }}
                 </div>
+                
                 <div>
                     {{ Form::label('description', __('layouts.tasks.description')) }}
                 </div>

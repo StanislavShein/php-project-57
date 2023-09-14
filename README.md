@@ -23,7 +23,7 @@ git clone https://github.com/StanislavShein/php-project-57.git
 cd php-project-57/
 ```
 ```sh
-make install
+make setup
 ```
 
 ![main](https://i.imgur.com/1o2ZPRc.png)

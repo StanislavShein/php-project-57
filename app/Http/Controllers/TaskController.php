@@ -22,6 +22,7 @@ class TaskController extends Controller
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
+        
         $task = new Task();
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
