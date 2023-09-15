@@ -41,7 +41,7 @@ class TaskStatusController extends Controller
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
-        
+
         return redirect()->route('task_statuses.index');
     }
 

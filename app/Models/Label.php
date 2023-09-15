@@ -12,11 +12,10 @@ class Label extends Model
     protected $fillable = [
         'name',
         'description',
-        'task_id',
     ];
 
     public function task()
     {
-        return $this->hasMany('App\Models\Task', 'label_id');
+        return $this->hasMany(Task::class);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\Taskstatus;
 use App\Models\User;
+use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,12 +23,13 @@ class TaskController extends Controller
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
-        
+
         $task = new Task();
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
 
-        return view('tasks.create', compact('task', 'statuses', 'users'));
+        return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
     public function store(Request $request)
@@ -37,6 +39,7 @@ class TaskController extends Controller
         $newTask->fill($data);
         $user = Auth::user();
         $newTask->created_by_id = $user->id;
+        $newTask->labels()->attach($data['labels']);
         $newTask->save();
 
         return redirect()->route('tasks.index');
@@ -55,8 +58,9 @@ class TaskController extends Controller
 
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
 
-        return view('tasks.edit', compact('task', 'statuses', 'users'));
+        return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
     public function update(Request $request, Task $task)
@@ -67,7 +71,10 @@ class TaskController extends Controller
 
         $data = $request->input();
         $task->fill($data);
+
+        //dd($data);
         $task->save();
+        $task->labels()->sync($data['labels']);
 
         return redirect()->route('tasks.index');
     }

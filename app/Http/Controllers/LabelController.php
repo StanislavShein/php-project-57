@@ -21,7 +21,7 @@ class LabelController extends Controller
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
-        
+
         $label = new Label();
 
         return view('labels.create', compact('label'));

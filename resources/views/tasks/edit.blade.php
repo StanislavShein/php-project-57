@@ -40,8 +40,9 @@
                     {{ Form::label('labels', __('layouts.tasks.labels')) }}
                 </div>
                 <div class="mt-2 text-black">
-                    {{ Form::text('labels', null, ['name' => 'labels']) }}
+                    {{ Form::select('labels[]', $labels, $task->labels, ['multiple' => true]) }}
                 </div>
+
                 <div class="mt-2">
                     {{ Form::submit(__('layouts.tasks.edit'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
                 </div>
