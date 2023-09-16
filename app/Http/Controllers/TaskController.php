@@ -8,14 +8,29 @@ use App\Models\User;
 use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::orderBy('id', 'asc')->paginate();
+        $users = User::pluck('name', 'id');
+        $statuses = TaskStatus::pluck('name', 'id');
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters(
+                [
+                    AllowedFilter::exact('status_id'),
+                    AllowedFilter::exact('created_by_id'),
+                    AllowedFilter::exact('assigned_to_id')
+                ]
+            )
+            ->orderBy('id', 'asc')
+            ->paginate();
 
-        return view('tasks.index', compact('tasks'));
+        $filter = $request->filter ?? null;
+
+        return view('tasks.index', compact('tasks', 'statuses', 'users', 'filter'));
     }
 
     public function create()
@@ -39,8 +54,11 @@ class TaskController extends Controller
         $newTask->fill($data);
         $user = Auth::user();
         $newTask->created_by_id = $user->id;
-        $newTask->labels()->attach($data['labels']);
         $newTask->save();
+
+        if (isset($data['labels'])) {
+            $newTask->labels()->attach($data['labels']);
+        }
 
         return redirect()->route('tasks.index');
     }
@@ -84,6 +102,8 @@ class TaskController extends Controller
         if (Auth::guest() || Auth::user()->id !== $task->creator->id) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
+
+        $task->labels()->detach();
 
         $task->delete();
 

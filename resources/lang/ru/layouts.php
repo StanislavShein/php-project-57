@@ -62,6 +62,9 @@ return [
         'edit' => 'Изменить',
         'edit_header' => 'Изменение задачи',
         'show_header' => 'Просмотр задачи',
+        'placeholder_status' => '- Статус -',
+        'placeholder_created_by' => '- Автор -',
+        'placeholder_assigned_to' => '- Исполнитель -',
     ],
     'labels' => [
         'index_header' => 'Метки',
