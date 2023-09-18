@@ -55,6 +55,7 @@ class TaskController extends Controller
         $user = Auth::user();
         $newTask->created_by_id = $user->id;
         $newTask->save();
+        flash(__('flash.tasks.created'))->success();
 
         if (isset($data['labels'])) {
             $newTask->labels()->attach($data['labels']);
@@ -89,10 +90,9 @@ class TaskController extends Controller
 
         $data = $request->input();
         $task->fill($data);
-
-        //dd($data);
         $task->save();
         $task->labels()->sync($data['labels']);
+        flash(__('flash.tasks.edited'))->success();
 
         return redirect()->route('tasks.index');
     }
@@ -106,6 +106,7 @@ class TaskController extends Controller
         $task->labels()->detach();
 
         $task->delete();
+        flash(__('flash.tasks.deleted'))->success();
 
         return redirect()->route('tasks.index');
     }

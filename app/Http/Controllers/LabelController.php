@@ -33,6 +33,7 @@ class LabelController extends Controller
         $newLabel = new Label();
         $newLabel->fill($data);
         $newLabel->save();
+        flash(__('flash.labels.created'))->success();
 
         return redirect()->route('labels.index');
     }
@@ -55,6 +56,7 @@ class LabelController extends Controller
         $data = $request->input();
         $label->fill($data);
         $label->save();
+        flash(__('flash.labels.edited'))->success();
 
         return redirect()->route('labels.index');
     }
@@ -69,11 +71,13 @@ class LabelController extends Controller
         }
 
         if ($label->task()->exists()) {
+            flash(__('flash.labels.notdeleted'))->error();
             return back();
         }
 
         $label->delete();
+        flash(__('flash.labels.deleted'))->success();
 
-        return redirect()->route('task_statuses.index');
+        return redirect()->route('labels.index');
     }
 }

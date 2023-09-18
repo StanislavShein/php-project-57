@@ -3,8 +3,8 @@
 @section('content')
 <section class="bg-white dark:bg-gray-900">
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
-        <div class="grid col-span-full">
-            <h1 class="mb-5">{{ __('layouts.tasks.index_header') }}</h1>
+        <div class="grid col-span-full dark:text-white">
+            <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layouts.tasks.index_header') }}</h1>
             <div>
                 {{Form::open(['route' => 'tasks.index', 'method' => 'GET'])}}
                     <div class="flex">

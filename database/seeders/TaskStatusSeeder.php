@@ -16,19 +16,19 @@ class TaskStatusSeeder extends Seeder
     {
         DB::table('task_statuses')->insert([
             [
-                'name' => 'новая',
+                'name' => 'новый',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'выполняется',
+                'name' => 'в работе',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => 'завершена',
+                'name' => 'на тестировании',
                 'created_at' => Carbon::now(),
             ],
             [
-                'name' => '	в архиве',
+                'name' => 'завершен',
                 'created_at' => Carbon::now(),
             ],
         ]);

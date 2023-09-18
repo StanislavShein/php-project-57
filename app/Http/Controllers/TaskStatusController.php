@@ -32,15 +32,7 @@ class TaskStatusController extends Controller
         $newStatus = new TaskStatus();
         $newStatus->fill($data);
         $newStatus->save();
-
-        return redirect()->route('task_statuses.index');
-    }
-
-    public function show(TaskStatus $taskStatus)
-    {
-        if (Auth::guest()) {
-            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
-        }
+        flash(__('flash.task_statuses.created'))->success();
 
         return redirect()->route('task_statuses.index');
     }
@@ -63,6 +55,7 @@ class TaskStatusController extends Controller
         $data = $request->input();
         $taskStatus->fill($data);
         $taskStatus->save();
+        flash(__('flash.task_statuses.edited'))->success();
 
         return redirect()->route('task_statuses.index');
     }
@@ -74,10 +67,12 @@ class TaskStatusController extends Controller
         }
 
         if ($taskStatus->task()->exists()) {
+            flash(__('flash.task_statuses.notdeleted'))->error();
             return back();
         }
 
         $taskStatus->delete();
+        flash(__('flash.task_statuses.deleted'))->success();
 
         return redirect()->route('task_statuses.index');
     }
