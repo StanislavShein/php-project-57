@@ -1,10 +1,12 @@
 <x-guest-layout>
+    <h2 class="text-center mb-5 text-3xl dark:text-white"><a href="/">{{ __('layouts.header.appname') }}</a></h2>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('layouts.auth.forgotmessage') }}
     </div>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    
 
     <form method="POST" action="{{ route('password.email') }}">
         @csrf

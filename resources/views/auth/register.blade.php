@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <h2 class="text-center mb-5 text-3xl dark:text-white"><a href="/">{{ __('layouts.header.appname') }}</a></h2>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
