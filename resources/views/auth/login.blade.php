@@ -40,7 +40,7 @@
                 </a>
             @endif
 
-            <x-primary-button class="ml-3">
+            <x-primary-button class="ml-3" style="text-transform: none;">
                 {{ __('layouts.auth.login') }}
             </x-primary-button>
         </div>
