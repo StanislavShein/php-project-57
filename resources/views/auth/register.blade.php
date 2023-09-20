@@ -45,7 +45,7 @@
                 {{ __('layouts.auth.alreadyreg') }}
             </a>
 
-            <x-primary-button class="ml-4">
+            <x-primary-button class="ml-4" style="text-transform: none;">
                 {{ __('layouts.auth.register') }}
             </x-primary-button>
         </div>

@@ -13,12 +13,15 @@ class LabelsTest extends TestCase
     use RefreshDatabase;
 
     private $label;
+    private $user;
+    private $data;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
         $this->label = Label::factory()->create();
+        $this->data = Label::factory()->make()->only(['name', 'description']);
     }
 
     public function testIndex(): void
@@ -40,6 +43,24 @@ class LabelsTest extends TestCase
         $response = $this->actingAs($this->user)->get(route('labels.create'));
 
         $response->assertOk();
+    }
+
+    public function testForbiddenStoreByUnknown(): void
+    {
+        $response = $this->post(route('labels.store'), $this->data);
+
+        $response->assertForbidden();
+
+        $this->assertDatabaseMissing('labels', $this->data);
+    }
+
+    public function testAllowedStoreByUser(): void
+    {
+        $response = $this->actingAs($this->user)->post(route('labels.store'), $this->data);
+
+        $response->assertRedirect(route('labels.index'));
+
+        $this->assertDatabaseHas('labels', $this->data);
     }
 
     public function testForbiddenEditByUnknown(): void

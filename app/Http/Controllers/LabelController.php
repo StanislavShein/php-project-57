@@ -29,6 +29,10 @@ class LabelController extends Controller
 
     public function store(Request $request)
     {
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
         $data = $request->input();
         $newLabel = new Label();
         $newLabel->fill($data);
