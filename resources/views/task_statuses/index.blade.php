@@ -4,13 +4,13 @@
 <section class="bg-white dark:bg-gray-900">
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         @if(session('success'))
-            <div class="alert alert-success dark:text-white">
+            <div class="alert alert-success text-black dark:text-white">
                 {{ session('success') }}
             </div>
         @endif
 
         @if(session('error'))
-            <div class="alert alert-danger dark:text-white">
+            <div class="alert alert-danger text-black dark:text-white">
                 {{ session('error') }}
             </div>
         @endif
@@ -42,7 +42,7 @@
                             @if (Auth::user())
                                 <td>
                                     <a href="{{ route('task_statuses.destroy', $taskStatus) }}" data-confirm="{{ __('layouts.task_statuses.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.task_statuses.delete')}}</a>
-                                    <a href="{{ route('task_statuses.edit', $taskStatus) }}" class=" text-blue-600 hover:text-blue-900">{{ __('layouts.task_statuses.edit')}}</a>
+                                    <a href="{{ route('task_statuses.edit', $taskStatus) }}" class="text-blue-600 hover:text-blue-900">{{ __('layouts.task_statuses.edit')}}</a>
                                 </td>
                             @endif
                         </tr>
