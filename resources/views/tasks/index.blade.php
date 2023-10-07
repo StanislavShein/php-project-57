@@ -5,29 +5,31 @@
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         <div class="grid col-span-full dark:text-white">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layouts.tasks.index_header') }}</h1>
-            <div>
-                {{Form::open(['route' => 'tasks.index', 'method' => 'GET'])}}
-                    <div class="flex">
-                        <div>
-                            {{Form::select('filter[status_id]', $statuses, $filter['status_id'] ?? null, ['placeholder' => __('layouts.tasks.placeholder_status')])}}
+            <div class="w-full flex items-center">
+                <div>
+                    {{Form::open(['route' => 'tasks.index', 'method' => 'GET'])}}
+                        <div class="flex">
+                            <div>
+                                {{Form::select('filter[status_id]', $statuses, $filter['status_id'] ?? null, ['placeholder' => __('layouts.tasks.placeholder_status')])}}
+                            </div>
+                            <div>
+                                {{Form::select('filter[created_by_id]', $users, $filter['created_by_id'] ?? null, ['placeholder' => __('layouts.tasks.placeholder_created_by')])}}
+                            </div>
+                            <div>
+                                {{Form::select('filter[assigned_to_id]', $users, $filter['assigned_to_id'] ?? null, ['placeholder' => __('layouts.tasks.placeholder_assigned_to')])}}
+                            </div>
+                            <div>
+                                {{Form::submit(__('применить'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2'])}}
+                            </div>
                         </div>
-                        <div>
-                            {{Form::select('filter[created_by_id]', $users, $filter['created_by_id'] ?? null, ['placeholder' => __('layouts.tasks.placeholder_created_by')])}}
-                        </div>
-                        <div>
-                            {{Form::select('filter[assigned_to_id]', $users, $filter['assigned_to_id'] ?? null, ['placeholder' => __('layouts.tasks.placeholder_assigned_to')])}}
-                        </div>
-                        <div>
-                            {{Form::submit(__('применить'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2'])}}
-                        </div>
+                    {{ Form::close() }}
+                </div>
+                @if (Auth::user())
+                    <div class="ml-auto">
+                        <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('layouts.tasks.create')}}</a>
                     </div>
-                {{ Form::close() }}
+                @endif
             </div>
-            @if (Auth::user())
-            <div>
-                <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('layouts.tasks.create')}}</a>
-            </div>
-            @endif
             <table class="mt-4">
                 <thead class="border-b-2 border-solid border-black text-left">
                     <tr>

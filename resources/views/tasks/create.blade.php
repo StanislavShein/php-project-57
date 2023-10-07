@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="mt-2">
-                    {{ Form::submit(__('layouts.tasks.create'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
+                    {{ Form::submit(__('layouts.tasks.creating'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
                 </div>
                 {{ Form::close() }}
             </div>
