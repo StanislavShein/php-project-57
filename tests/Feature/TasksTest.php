@@ -11,8 +11,6 @@ use App\Models\TaskStatus;
 
 class TasksTest extends TestCase
 {
-    use RefreshDatabase;
-
     private $user;
     private $creator;
     private $taskStatus;
@@ -69,6 +67,7 @@ class TasksTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get(route('tasks.edit', $this->task));
 
+        $response->assertSessionHasNoErrors();
         $response->assertOk();
     }
 
@@ -90,6 +89,7 @@ class TasksTest extends TestCase
     {
         $response = $this->actingAs($this->creator)->delete(route('tasks.destroy', $this->task));
 
+        $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
 
         $this->assertDatabaseMissing('tasks', ['id' => $this->task->id]);

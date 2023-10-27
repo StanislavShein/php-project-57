@@ -10,8 +10,6 @@ use App\Models\Label;
 
 class LabelsTest extends TestCase
 {
-    use RefreshDatabase;
-
     private $label;
     private $user;
     private $data;
@@ -58,6 +56,7 @@ class LabelsTest extends TestCase
     {
         $response = $this->actingAs($this->user)->post(route('labels.store'), $this->data);
 
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
 
         $this->assertDatabaseHas('labels', $this->data);
@@ -74,6 +73,7 @@ class LabelsTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get(route('labels.edit', $this->label));
 
+        $response->assertSessionHasNoErrors();
         $response->assertOk();
     }
 
@@ -88,6 +88,7 @@ class LabelsTest extends TestCase
     {
         $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->label));
 
+        $response->assertSessionHasNoErrors();
         $response->assertStatus(302);
 
         $this->assertDatabaseMissing('labels', ['id' => $this->label->id]);

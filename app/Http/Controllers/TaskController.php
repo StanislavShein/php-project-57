@@ -55,7 +55,7 @@ class TaskController extends Controller
         $user = Auth::user();
         $newTask->created_by_id = $user->id;
         $newTask->save();
-        flash(__('flash.tasks.created'))->success();
+        session()->flash('success', __('flash.tasks.created'));
 
         if (isset($data['labels'])) {
             $newTask->labels()->attach($data['labels']);
@@ -91,8 +91,22 @@ class TaskController extends Controller
         $data = $request->input();
         $task->fill($data);
         $task->save();
-        $task->labels()->sync($data['labels']);
-        flash(__('flash.tasks.edited'))->success();
+        if (isset($data['labels'])) {
+            $labels = $data['labels'];
+            if (in_array(null, $labels, true)) {
+                $filteredLabels = array_filter($labels, function ($label) {
+                    return $label !== null;
+                });
+                if (count($filteredLabels) > 0) {
+                    $task->labels()->sync($filteredLabels);
+                } else {
+                    $task->labels()->detach();
+                }
+            } else {
+                $task->labels()->sync($labels);
+            }
+        }
+        session()->flash('success', __('flash.tasks.edited'));
 
         return redirect()->route('tasks.index');
     }
@@ -106,7 +120,7 @@ class TaskController extends Controller
         $task->labels()->detach();
 
         $task->delete();
-        flash(__('flash.tasks.deleted'))->success();
+        session()->flash('success', __('flash.tasks.deleted'));
 
         return redirect()->route('tasks.index');
     }

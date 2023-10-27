@@ -9,6 +9,7 @@
 .env.backup
 .env.production
 .phpunit.result.cache
+.gitignore
 Homestead.json
 Homestead.yaml
 auth.json
@@ -18,3 +19,6 @@ yarn-error.log
 /.idea
 /.vscode
 /build
+.config.js
+.editorconfig
+.gitattributes

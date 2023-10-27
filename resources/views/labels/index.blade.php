@@ -3,6 +3,18 @@
 @section('content')
 <section class="bg-white dark:bg-gray-900">
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
+        @if(session('success'))
+            <div class="alert alert-success text-black dark:text-white">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger text-black dark:text-white">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="grid col-span-full dark:text-white">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layouts.labels.index_header') }}</h1>
             @if (Auth::user())
