@@ -14,12 +14,22 @@
                 <div class="mt-2 text-black">
                     {{ Form::text('name', '', ['class' => 'form-control rounded border-gray-300 w-1/3']) }}
                 </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('name') }}
+                    @endif
+                </div>
 
                 <div>
                     {{ Form::label('description', __('layouts.labels.description')) }}
                 </div>
                 <div class="mt-2 text-black">
                     {{ Form::textarea('description', '', ['class' => 'form-control rounded border-gray-300 w-1/3 h-32', 'cols' => '50', 'rows' => '10']) }}
+                </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('description') }}
+                    @endif
                 </div>
 
                 <div class="mt-2">

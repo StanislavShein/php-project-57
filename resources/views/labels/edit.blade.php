@@ -14,12 +14,22 @@
                 <div class="mt-2 text-black">
                     {{ Form::text('name') }}
                 </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('name') }}
+                    @endif
+                </div>
 
                 <div>
                     {{ Form::label('description', __('layouts.labels.description')) }}
                 </div>
                 <div class="mt-2 text-black">
                     {{ Form::text('description') }}
+                </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('description') }}
+                    @endif
                 </div>
 
                 <div class="mt-2">

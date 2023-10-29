@@ -7,6 +7,7 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
 use Illuminate\Http\Request;
+use App\Http\Requests\TaskRequest;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -47,9 +48,9 @@ class TaskController extends Controller
         return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-        $data = $request->input();
+        $data = $request->validated();
         $newTask = new Task();
         $newTask->fill($data);
         $user = Auth::user();
@@ -82,13 +83,13 @@ class TaskController extends Controller
         return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
-    public function update(Request $request, Task $task)
+    public function update(TaskRequest $request, Task $task)
     {
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
-        $data = $request->input();
+        $data = $request->validated();
         $task->fill($data);
         $task->save();
         if (isset($data['labels'])) {

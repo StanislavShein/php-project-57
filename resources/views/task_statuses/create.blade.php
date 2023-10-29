@@ -14,6 +14,11 @@
                 <div class="mt-2 text-black">
                     {{ Form::text('name') }}
                 </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('name') }}
+                    @endif
+                </div>
                 <div class="mt-2">
                     {{ Form::submit(__('layouts.task_statuses.creating'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
                 </div>

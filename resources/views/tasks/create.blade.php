@@ -14,12 +14,22 @@
                 <div class="mt-2 text-black">
                     {{ Form::text('name') }}
                 </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('name') }}
+                    @endif
+                </div>
 
                 <div>
                     {{ Form::label('description', __('layouts.tasks.description')) }}
                 </div>
                 <div class="mt-2 text-black">
                     {{ Form::text('description') }}
+                </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('description') }}
+                    @endif
                 </div>
 
                 <div>
@@ -28,12 +38,22 @@
                 <div class="mt-2 text-black">
                     {{ Form::select('status_id', $statuses, null, ['placeholder' => '----------']) }}
                 </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('status_id') }}
+                    @endif
+                </div>
                 
                 <div>
                     {{ Form::label('assigned_to', __('layouts.tasks.executor')) }}
                 </div>
                 <div class="mt-2 text-black">
                     {{ Form::select('assigned_to_id', $users, null, ['placeholder' => '----------']) }}
+                </div>
+                <div>
+                    @if ($errors->any())
+                        {{ $errors->first('assigned_to_id') }}
+                    @endif
                 </div>
 
                 <div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Label;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Requests\LabelRequest;
 use Illuminate\Support\Facades\Auth;
 
 class LabelController extends Controller
@@ -27,13 +28,13 @@ class LabelController extends Controller
         return view('labels.create', compact('label'));
     }
 
-    public function store(Request $request)
+    public function store(LabelRequest $request)
     {
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
-        $data = $request->input();
+        $data = $request->validated();
         $newLabel = new Label();
         $newLabel->fill($data);
         $newLabel->save();
@@ -51,7 +52,7 @@ class LabelController extends Controller
         return view('labels.edit', compact('label'));
     }
 
-    public function update(Request $request, Label $label)
+    public function update(LabelRequest $request, Label $label)
     {
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
@@ -65,9 +66,6 @@ class LabelController extends Controller
         return redirect()->route('labels.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Label $label)
     {
         if (Auth::guest()) {
