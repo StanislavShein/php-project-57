@@ -10,8 +10,8 @@ use App\Models\User;
 
 class TaskStatusesTest extends TestCase
 {
-    private $user;
-    private $taskStatus;
+    private User $user;
+    private TaskStatus $taskStatus;
 
     protected function setUp(): void
     {

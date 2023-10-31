@@ -50,11 +50,14 @@ class TaskController extends Controller
 
     public function store(TaskRequest $request)
     {
+        if (Auth::guest()) {
+            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        }
+
         $data = $request->validated();
         $newTask = new Task();
         $newTask->fill($data);
-        $user = Auth::user();
-        $newTask->created_by_id = $user->id;
+        $newTask->created_by_id = Auth::id();
         $newTask->save();
         session()->flash('success', __('flash.tasks.created'));
 
@@ -90,17 +93,15 @@ class TaskController extends Controller
         }
 
         $data = $request->validated();
-        if ($task) {
-            $data['created_by_id'] = $task->created_by_id;
-            $task->fill($data);
+        $data['created_by_id'] = $task->created_by_id;
+        $task->fill($data);
 
-            if (array_key_exists('labels', $data)) {
-                $task->labels()->sync($data['labels']);
-            }
-
-            $task->save();
-            session()->flash('success', __('flash.tasks.edited'));
+        if (array_key_exists('labels', $data)) {
+            $task->labels()->sync($data['labels']);
         }
+
+        $task->save();
+        session()->flash('success', __('flash.tasks.edited'));
 
         return redirect()->route('tasks.index');
     }

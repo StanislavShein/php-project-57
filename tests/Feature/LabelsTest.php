@@ -10,9 +10,9 @@ use App\Models\Label;
 
 class LabelsTest extends TestCase
 {
-    private $label;
-    private $user;
-    private $data;
+    private Label $label;
+    private User $user;
+    private array $data;
 
     protected function setUp(): void
     {

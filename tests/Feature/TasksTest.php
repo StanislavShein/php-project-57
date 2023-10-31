@@ -11,10 +11,10 @@ use App\Models\TaskStatus;
 
 class TasksTest extends TestCase
 {
-    private $user;
-    private $creator;
-    private $taskStatus;
-    private $task;
+    private User $user;
+    private User $creator;
+    private TaskStatus $taskStatus;
+    private Task $task;
 
 
     protected function setUp(): void
