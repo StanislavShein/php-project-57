@@ -45,10 +45,10 @@
                 </div>
                 
                 <div>
-                    {{ Form::label('assigned_to', __('layouts.tasks.executor')) }}
+                    {{ Form::label('assigned_to_id', __('layouts.tasks.executor')) }}
                 </div>
                 <div class="mt-2 text-black">
-                    {{ Form::select('assigned_to', $users, null, ['placeholder' => '----------']) }}
+                    {{ Form::select('assigned_to_id', $users, null, ['placeholder' => '----------']) }}
                 </div>
                 <div>
                     @if ($errors->any())

@@ -90,23 +90,14 @@ class TaskController extends Controller
         }
 
         $data = $request->validated();
+        $data['created_by_id'] = $task->created_by_id;
         $task->fill($data);
-        $task->save();
-        if (isset($data['labels'])) {
-            $labels = $data['labels'];
-            if (in_array(null, $labels, true)) {
-                $filteredLabels = array_filter($labels, function ($label) {
-                    return $label !== null;
-                });
-                if (count($filteredLabels) > 0) {
-                    $task->labels()->sync($filteredLabels);
-                } else {
-                    $task->labels()->detach();
-                }
-            } else {
-                $task->labels()->sync($labels);
-            }
+        
+        if (array_key_exists('labels', $data)) {
+            $task->labels()->sync($data['labels']);
         }
+
+        $task->save();
         session()->flash('success', __('flash.tasks.edited'));
 
         return redirect()->route('tasks.index');
