@@ -38,7 +38,7 @@
                         <tr class="border-b border-dashed text-left">
                             <td>{{ $taskStatus->id }}</td>
                             <td>{{ $taskStatus->name }}</td>
-                            <td>{{ $taskStatus->created_at }}</td>
+                            <td>{{ date_format($taskStatus->created_at, 'd.m.Y') }}</td>
                             @if (Auth::user())
                                 <td>
                                     <a href="{{ route('task_statuses.destroy', $taskStatus) }}" data-confirm="{{ __('layouts.task_statuses.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.task_statuses.delete')}}</a>

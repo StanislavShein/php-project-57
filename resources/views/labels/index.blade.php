@@ -40,7 +40,7 @@
                             <td>{{ $label->id }}</td>
                             <td>{{ $label->name }}</td>
                             <td>{{ $label->description }}</td>
-                            <td>{{ $label->created_at }}</td>
+                            <td>{{ date_format($label->created_at, 'd.m.Y') }}</td>
                             @if (Auth::user())
                                 <td>
                                     <a href="{{ route('labels.destroy', $label) }}" data-confirm="{{ __('layouts.labels.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.labels.delete')}}</a>

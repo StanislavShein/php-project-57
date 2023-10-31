@@ -66,7 +66,7 @@
                         </td>
                         <td>{{ $task->creator->name }}</td>
                         <td>{{ $task->executor->name}}</td>
-                        <td>{{ $task->created_at }}</td>
+                        <td>{{ date_format($task->created_at, 'd.m.Y') }}</td>
                         @if (Auth::user())
                             <td>
                                 @if (Auth::user()->id === $task->creator->id)
