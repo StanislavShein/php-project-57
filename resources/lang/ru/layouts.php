@@ -66,6 +66,7 @@ return [
         'placeholder_created_by' => '- Автор -',
         'placeholder_assigned_to' => '- Исполнитель -',
         'update' => 'Обновить',
+        'apply' => 'Применить',
     ],
     'labels' => [
         'index_header' => 'Метки',

@@ -31,7 +31,7 @@
                                 {{Form::select('filter[assigned_to_id]', $users, $filter['assigned_to_id'] ?? null, ['placeholder' => __('layouts.tasks.placeholder_assigned_to')])}}
                             </div>
                             <div>
-                                {{Form::submit(__('применить'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2'])}}
+                                {{Form::submit(__('layouts.tasks.apply'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2'])}}
                             </div>
                         </div>
                     {{ Form::close() }}

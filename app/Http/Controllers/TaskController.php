@@ -92,7 +92,7 @@ class TaskController extends Controller
         $data = $request->validated();
         $data['created_by_id'] = $task->created_by_id;
         $task->fill($data);
-        
+
         if (array_key_exists('labels', $data)) {
             $task->labels()->sync($data['labels']);
         }
