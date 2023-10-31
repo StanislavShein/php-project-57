@@ -93,11 +93,11 @@ class TaskController extends Controller
         if ($task) {
             $data['created_by_id'] = $task->created_by_id;
             $task->fill($data);
-    
+
             if (array_key_exists('labels', $data)) {
                 $task->labels()->sync($data['labels']);
             }
-    
+
             $task->save();
             session()->flash('success', __('flash.tasks.edited'));
         }
