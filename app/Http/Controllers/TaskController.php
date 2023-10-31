@@ -90,29 +90,33 @@ class TaskController extends Controller
         }
 
         $data = $request->validated();
-        $data['created_by_id'] = $task->created_by_id;
-        $task->fill($data);
-
-        if (array_key_exists('labels', $data)) {
-            $task->labels()->sync($data['labels']);
+        if ($task) {
+            $data['created_by_id'] = $task->created_by_id;
+            $task->fill($data);
+    
+            if (array_key_exists('labels', $data)) {
+                $task->labels()->sync($data['labels']);
+            }
+    
+            $task->save();
+            session()->flash('success', __('flash.tasks.edited'));
         }
-
-        $task->save();
-        session()->flash('success', __('flash.tasks.edited'));
 
         return redirect()->route('tasks.index');
     }
 
     public function destroy(Task $task)
     {
-        if (Auth::guest() || Auth::user()->id !== $task->creator->id) {
-            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+        if ($task) {
+            if (Auth::guest() || Auth::user()->id !== $task->creator->id) {
+                return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
+            }
+
+            $task->labels()->detach();
+
+            $task->delete();
+            session()->flash('success', __('flash.tasks.deleted'));
         }
-
-        $task->labels()->detach();
-
-        $task->delete();
-        session()->flash('success', __('flash.tasks.deleted'));
 
         return redirect()->route('tasks.index');
     }
