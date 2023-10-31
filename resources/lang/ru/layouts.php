@@ -22,7 +22,8 @@ return [
         'create' => 'Создать статус',
         'creating' => 'Создать',
         'edit_header' => 'Изменение статуса',
-        'edit' => 'Обновить',
+        'edit' => 'Изменить',
+        'update' => 'Обновить',
     ],
     'auth' => [
         'email' => 'Email',
@@ -64,6 +65,7 @@ return [
         'placeholder_status' => '- Статус -',
         'placeholder_created_by' => '- Автор -',
         'placeholder_assigned_to' => '- Исполнитель -',
+        'update' => 'Обновить',
     ],
     'labels' => [
         'index_header' => 'Метки',
@@ -75,9 +77,10 @@ return [
         'create' => 'Создать метку',
         'delete' => 'Удалить',
         'confirm' => 'Вы уверены?',
-        'edit' => 'Обновить',
+        'edit' => 'Изменить',
         'creating' => 'Создать',
         'create_header' => 'Создание метки',
         'edit_header' => 'Изменение метки',
+        'update' => 'Обновить',
     ]
 ];
