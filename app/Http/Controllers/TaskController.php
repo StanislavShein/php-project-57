@@ -108,7 +108,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        if (Auth::guest() || Auth::id() !== $task->creator->id) {
+        if (Auth::guest() || Auth::id() !== $task->created_by_id) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
