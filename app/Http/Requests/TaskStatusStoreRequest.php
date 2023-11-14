@@ -15,6 +15,7 @@ class TaskStatusStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:task_statuses,name|max:255',
+            'description' => 'max:255'
         ];
     }
 

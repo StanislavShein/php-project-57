@@ -17,6 +17,8 @@ class TaskUpdateRequest extends FormRequest
             'name' => 'required|max:255',
             'description' => 'max:255',
             'status_id' => 'required',
+            'assigned_to_id' => '',
+            'labels' => '',
         ];
     }
 
