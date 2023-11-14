@@ -2,16 +2,17 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Label;
+use App\Models\Task;
 
 class LabelsTest extends TestCase
 {
     private Label $label;
+    private Label $associatedWithTaskLabel;
     private User $user;
+    private Task $task;
     private array $data;
 
     protected function setUp(): void
@@ -19,6 +20,9 @@ class LabelsTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->label = Label::factory()->create();
+        $this->associatedWithTaskLabel = Label::factory()->create();
+        $this->task = Task::factory()->create();
+        $this->associatedWithTaskLabel->task()->attach($this->task);
         $this->data = Label::factory()->make()->only(['name', 'description']);
     }
 
@@ -92,5 +96,12 @@ class LabelsTest extends TestCase
         $response->assertStatus(302);
 
         $this->assertDatabaseMissing('labels', ['id' => $this->label->id]);
+    }
+
+    public function testForbiddenDestroyLabelWithAssociatedTask(): void
+    {
+        $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->associatedWithTaskLabel));
+
+        $this->assertDatabaseHas('labels', ['id' => $this->associatedWithTaskLabel->id]);
     }
 }

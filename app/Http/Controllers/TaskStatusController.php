@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
-use Illuminate\Http\Request;
-use App\Http\Requests\TaskStatusRequest;
+use App\Http\Requests\TaskStatusStoreRequest;
+use App\Http\Requests\TaskStatusUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 
 class TaskStatusController extends Controller
@@ -27,7 +27,7 @@ class TaskStatusController extends Controller
         return view('task_statuses.create', compact('taskStatus'));
     }
 
-    public function store(TaskStatusRequest $request)
+    public function store(TaskStatusStoreRequest $request)
     {
         $data = $request->validated();
         $newStatus = new TaskStatus();
@@ -47,7 +47,7 @@ class TaskStatusController extends Controller
         return view('task_statuses.edit', compact('taskStatus'));
     }
 
-    public function update(TaskStatusRequest $request, TaskStatus $taskStatus)
+    public function update(TaskStatusUpdateRequest $request, TaskStatus $taskStatus)
     {
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');

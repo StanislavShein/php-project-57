@@ -65,7 +65,7 @@
                             <a class="text-blue-600 hover:text-blue-900" href="{{ route('tasks.show', $task->id) }}">{{ $task->name }}</a>
                         </td>
                         <td>{{ $task->creator->name }}</td>
-                        <td>{{ $task->executor->name}}</td>
+                        <td>{{ $task->executor->name ?? '' }}</td>
                         <td>{{ date_format($task->created_at, 'd.m.Y') }}</td>
                         @if (Auth::user())
                             <td>

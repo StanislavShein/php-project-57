@@ -1,12 +1,12 @@
 @extends('layouts.main')
-
 @section('content')
+
 @if (Auth::user())
 <section class="bg-white dark:bg-gray-900">
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         <div class="grid col-span-full dark:text-white">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layouts.tasks.create_header') }}</h1>
-            {{ Form::model($task, ['url' => route('tasks.store'), 'class' => 'w-50']) }}
+            {{ Form::open(['url' => route('tasks.store'), 'method' => 'POST', 'class' => 'w-50']) }}
             <div class="flex flex-col">
                 <div>
                     {{ Form::label('name', __('layouts.tasks.name')) }}
@@ -60,7 +60,7 @@
                     {{ Form::label('labels', __('layouts.tasks.labels')) }}
                 </div>
                 <div class="mt-2 text-black">
-                    {{ Form::select('labels[]', $labels, $task->labels, ['multiple' => true]) }}
+                    {{ Form::select('labels[]', $labels, null, ['multiple' => true]) }}
                 </div>
 
                 <div class="mt-2">
@@ -72,4 +72,5 @@
     </div>
 </section>
 @endif
+
 @endsection

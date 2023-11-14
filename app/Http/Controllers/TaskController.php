@@ -7,7 +7,8 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
 use Illuminate\Http\Request;
-use App\Http\Requests\TaskRequest;
+use App\Http\Requests\TaskStoreRequest;
+use App\Http\Requests\TaskUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -40,30 +41,31 @@ class TaskController extends Controller
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
-        $task = new Task();
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
 
-        return view('tasks.create', compact('task', 'statuses', 'users', 'labels'));
+        return view('tasks.create', compact('statuses', 'users', 'labels'));
     }
 
-    public function store(TaskRequest $request)
+    public function store(TaskStoreRequest $request)
     {
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
         $data = $request->validated();
-        $newTask = new Task();
-        $newTask->fill($data);
-        $newTask->created_by_id = (int) Auth::id();
-        $newTask->save();
-        session()->flash('success', __('flash.tasks.created'));
+        $data['created_by_id'] = (int) Auth::id();
+
+        $task = new Task();
+        $task->fill($data);
+        $task->save();
 
         if (isset($data['labels'])) {
-            $newTask->labels()->attach($data['labels']);
+            $task->label()->attach($data['labels']);
         }
+
+        session()->flash('success', __('flash.tasks.created'));
 
         return redirect()->route('tasks.index');
     }
@@ -86,7 +88,7 @@ class TaskController extends Controller
         return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
-    public function update(TaskRequest $request, Task $task)
+    public function update(TaskUpdateRequest $request, Task $task)
     {
         if (Auth::guest()) {
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
@@ -97,7 +99,7 @@ class TaskController extends Controller
         $task->fill($data);
 
         if (array_key_exists('labels', $data)) {
-            $task->labels()->sync($data['labels']);
+            $task->label()->attach($data['labels']);
         }
 
         $task->save();
@@ -112,7 +114,7 @@ class TaskController extends Controller
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
-        $task->labels()->detach();
+        $task->label()->detach();
 
         $task->delete();
         session()->flash('success', __('flash.tasks.deleted'));

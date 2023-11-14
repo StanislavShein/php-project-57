@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaskRequest extends FormRequest
+class LabelUpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,10 +14,8 @@ class TaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:tasks,name|max:255',
+            'name' => 'required|max:255',
             'description' => 'max:255',
-            'status_id' => 'required',
-            'assigned_to_id' => 'required',
         ];
     }
 
@@ -25,11 +23,8 @@ class TaskRequest extends FormRequest
     {
         return [
             'name.required' => __('validation.required_error'),
-            'name.unique' => __('validation.unique_error_task'),
             'name.max' => __('validation.max_error'),
             'description.max' => __('validation.max_error'),
-            'status_id.required' => __('validation.required_error'),
-            'assigned_to_id' => __('validation.required_error'),
         ];
     }
 }

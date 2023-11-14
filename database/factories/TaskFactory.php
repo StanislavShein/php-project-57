@@ -21,7 +21,7 @@ class TaskFactory extends Factory
         return [
             'name' => fake()->unique()->sentence(),
             'description' => fake()->text(100),
-            'status_id' => TaskStatus::pluck('id')->random(),
+            'status_id' => TaskStatus::factory()->create()->id,
             'created_by_id' => User::pluck('id')->random(),
             'assigned_to_id' => User::pluck('id')->random(),
         ];
