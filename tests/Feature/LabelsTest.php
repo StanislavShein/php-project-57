@@ -81,10 +81,22 @@ class LabelsTest extends TestCase
         $response->assertOk();
     }
 
+    public function testAllowedUpdateByUser(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->patch(route('labels.update', $this->label), $this->data);
+
+        $this->assertDatabaseHas('labels', $this->data);
+
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('labels.index'));
+    }
+
     public function testForbiddenDestroyByUnknown(): void
     {
         $response = $this->delete(route('labels.destroy', $this->label));
 
+        $response->assertSessionHasNoErrors();
         $response->assertForbidden();
     }
 
@@ -93,6 +105,7 @@ class LabelsTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->label));
 
         $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('labels.index'));
         $response->assertStatus(302);
 
         $this->assertDatabaseMissing('labels', ['id' => $this->label->id]);

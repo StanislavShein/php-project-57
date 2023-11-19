@@ -10,11 +10,13 @@ class TaskStatusesTest extends TestCase
 {
     private User $user;
     private TaskStatus $taskStatus;
+    private array $data;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->data = TaskStatus::factory()->make()->only(['name']);
         $this->taskStatus = TaskStatus::factory()->create();
     }
 
@@ -39,6 +41,16 @@ class TaskStatusesTest extends TestCase
         $response->assertOk();
     }
 
+    public function testAllowedStoreByUser(): void
+    {
+        $response = $this->actingAs($this->user)->post(route('task_statuses.store'), $this->data);
+
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('task_statuses.index'));
+
+        $this->assertDatabaseHas('task_statuses', $this->data);
+    }
+
     public function testForbiddenEditByUnknown(): void
     {
         $response = $this->get(route('task_statuses.edit', $this->taskStatus));
@@ -54,6 +66,17 @@ class TaskStatusesTest extends TestCase
         $response->assertOk();
     }
 
+    public function testAllowedUpdateByUser(): void
+    {
+        $response = $this->actingAs($this->user)
+            ->put(route('task_statuses.update', $this->taskStatus), $this->data);
+
+        $this->assertDatabaseHas('task_statuses', $this->data);
+
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('task_statuses.index'));
+    }
+
     public function testForbiddenDestroyByUnknown(): void
     {
         $response = $this->delete(route('task_statuses.destroy', $this->taskStatus));
@@ -66,6 +89,7 @@ class TaskStatusesTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $this->taskStatus));
 
         $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('task_statuses.index'));
         $response->assertStatus(302);
 
         $this->assertDatabaseMissing('task_statuses', ['id' => $this->taskStatus->id]);

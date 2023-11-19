@@ -36,11 +36,11 @@
                         </div>
                     {{ Form::close() }}
                 </div>
-                @if (Auth::user())
+                @auth()
                     <div class="ml-auto">
                         <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('layouts.tasks.create')}}</a>
                     </div>
-                @endif
+                @endauth
             </div>
             <table class="mt-4">
                 <thead class="border-b-2 border-solid border-black text-left">
@@ -51,9 +51,9 @@
                         <th>{{ __('layouts.tasks.creator') }}</th>
                         <th>{{ __('layouts.tasks.executor') }}</th>
                         <th>{{ __('layouts.tasks.created_at') }}</th>
-                        @if (Auth::user())
+                        @auth()
                             <th>{{ __('layouts.tasks.actions') }}</th>
-                        @endif
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
@@ -67,14 +67,14 @@
                         <td>{{ $task->creator->name }}</td>
                         <td>{{ $task->executor->name ?? '' }}</td>
                         <td>{{ date_format($task->created_at, 'd.m.Y') }}</td>
-                        @if (Auth::user())
+                        @auth()
                             <td>
                                 @if (Auth::user()->id === $task->creator->id)
                                     <a href="{{ route('tasks.destroy', $task->id) }}" data-confirm="{{ __('layouts.tasks.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.tasks.delete')}}</a>
                                 @endif
                                     <a href="{{ route('tasks.edit', $task) }}" class=" text-blue-600 hover:text-blue-900">{{ __('layouts.tasks.edit')}}</a>
                             </td>
-                        @endif
+                        @endauth
                     </tr>
                     @endforeach
                 </tbody>

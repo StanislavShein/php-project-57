@@ -17,11 +17,11 @@
 
         <div class="grid col-span-full dark:text-white">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layouts.labels.index_header') }}</h1>
-            @if (Auth::user())
+            @auth()
                 <div>
                     <a href="{{ route('labels.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('layouts.labels.create')}}</a>
                 </div>
-            @endif
+            @endauth
             <table class="mt-4">
                 <thead class="border-b-2 border-solid border-black text-left">
                     <tr>
@@ -29,9 +29,9 @@
                         <th>{{ __('layouts.labels.name') }}</th>
                         <th>{{ __('layouts.labels.description') }}</th>
                         <th>{{ __('layouts.labels.created_at') }}</th>
-                        @if (Auth::user())
+                        @auth()
                             <th>{{ __('layouts.labels.actions')}}</th>
-                        @endif
+                        @endauth
                     </tr>
                 </thead>
                 <tbody>
@@ -41,12 +41,12 @@
                             <td>{{ $label->name }}</td>
                             <td>{{ $label->description }}</td>
                             <td>{{ date_format($label->created_at, 'd.m.Y') }}</td>
-                            @if (Auth::user())
+                            @auth()
                                 <td>
                                     <a href="{{ route('labels.destroy', $label) }}" data-confirm="{{ __('layouts.labels.confirm') }}" class="text-red-600 hover:text-red-900" data-method="delete" rel="nofollow">{{ __('layouts.labels.delete')}}</a>
                                     <a href="{{ route('labels.edit', $label) }}" class=" text-blue-600 hover:text-blue-900">{{ __('layouts.labels.edit')}}</a>
                                 </td>
-                            @endif
+                            @endauth
                         </tr>
                     @endforeach
                 </tbody>
