@@ -14,7 +14,7 @@ class TaskUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
+            'name' => "required|unique:tasks,name,{$this->task->id}|max:255",
             'description' => 'max:255',
             'status_id' => 'required',
             'assigned_to_id' => '',
@@ -26,6 +26,7 @@ class TaskUpdateRequest extends FormRequest
     {
         return [
             'name.required' => __('validation.required_error'),
+            'name.unique' => __('validation.unique_error_status'),
             'name.max' => __('validation.max_error'),
             'description.max' => __('validation.max_error'),
             'status_id.required' => __('validation.required_error'),

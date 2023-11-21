@@ -14,7 +14,7 @@ class LabelUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
+            'name' => "required|unique:labels,name,{$this->label->id}|max:255",
             'description' => 'max:255',
         ];
     }
@@ -23,6 +23,7 @@ class LabelUpdateRequest extends FormRequest
     {
         return [
             'name.required' => __('validation.required_error'),
+            'name.unique' => __('validation.unique_error_label'),
             'name.max' => __('validation.max_error'),
             'description.max' => __('validation.max_error'),
         ];
