@@ -20,6 +20,18 @@
 <body>
     @include('components.header')
     <div id="app">
+        @if(session('success'))
+            <div class="alert alert-success text-green dark:text-white">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger col-span-full text-red dark:text-white">
+                {{ session('error') }}
+            </div>
+        @endif
+        
         @yield('content')
     </div>
 </body>
