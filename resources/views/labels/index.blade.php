@@ -4,13 +4,13 @@
 <section class="bg-white dark:bg-gray-900">
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         @if(session('success'))
-            <div class="alert alert-success text-black dark:text-white">
+            <div class="alert alert-success text-green dark:text-white">
                 {{ session('success') }}
             </div>
         @endif
 
         @if(session('error'))
-            <div class="alert alert-danger text-black dark:text-white">
+            <div class="alert alert-danger text-red dark:text-white">
                 {{ session('error') }}
             </div>
         @endif
