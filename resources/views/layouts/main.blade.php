@@ -18,20 +18,22 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 </head>
 <body>
-    @include('components.header')
     <div id="app">
-        @if(session('success'))
-            <div class="alert alert-success text-green dark:text-white">
-                {{ session('success') }}
-            </div>
-        @endif
+        @include('components.header')
 
-        @if(session('error'))
-            <div class="alert alert-danger col-span-full text-red dark:text-white">
-                {{ session('error') }}
-            </div>
-        @endif
-        
+        <div class="grid max-w-screen-xl px-4 mx-auto lg:gap-8 xl:gap-0">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+
         @yield('content')
     </div>
 </body>
