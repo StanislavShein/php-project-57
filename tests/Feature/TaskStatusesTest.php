@@ -103,7 +103,8 @@ class TaskStatusesTest extends TestCase
 
     public function testForbiddenDestroyStatuslWithAssociatedTask(): void
     {
-        $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $this->associatedWithTaskStatus));
+        $response = $this->actingAs($this->user)
+            ->delete(route('task_statuses.destroy', $this->associatedWithTaskStatus));
 
         $this->assertDatabaseHas('task_statuses', ['id' => $this->associatedWithTaskStatus->id]);
     }
