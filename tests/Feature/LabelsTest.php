@@ -22,7 +22,7 @@ class LabelsTest extends TestCase
         $this->label = Label::factory()->create();
         $this->associatedWithTaskLabel = Label::factory()->create();
         $this->task = Task::factory()->create();
-        $this->associatedWithTaskLabel->task()->attach($this->task);
+        $this->associatedWithTaskLabel->tasks()->attach($this->task);
         $this->data = Label::factory()->make()->only(['name', 'description']);
     }
 

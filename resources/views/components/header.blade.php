@@ -1,7 +1,7 @@
 <header class="fixed w-full relative">
     <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900 shadow-md">
         <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-            <a href="/" class="flex items-center">
+            <a href="{{ route('main') }}" class="flex items-center">
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{ __('layouts.header.appname') }}</span>
             </a>
             <div class="flex items-center lg:order-2">

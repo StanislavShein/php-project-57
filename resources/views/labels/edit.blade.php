@@ -7,36 +7,36 @@
         <div class="grid col-span-full dark:text-white">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layouts.labels.edit_header') }}</h1>
             {{ Form::model($label, ['route' => ['labels.update', $label], 'method' => 'PATCH', 'class' => 'w-50']) }}
-            <div class="flex flex-col">
-                <div>
-                    {{ Form::label('name', __('layouts.labels.name')) }}
-                </div>
-                <div class="mt-2 text-black">
-                    {{ Form::text('name') }}
-                </div>
-                <div>
-                    @if ($errors->any())
-                        {{ $errors->first('name') }}
-                    @endif
-                </div>
+                <div class="flex flex-col">
+                    <div>
+                        {{ Form::label('name', __('layouts.labels.name')) }}
+                    </div>
+                    <div class="mt-2 text-black">
+                        {{ Form::text('name') }}
+                    </div>
+                    <div>
+                        @if ($errors->any())
+                            {{ $errors->first('name') }}
+                        @endif
+                    </div>
 
-                <div>
-                    {{ Form::label('description', __('layouts.labels.description')) }}
-                </div>
-                <div class="mt-2 text-black">
-                    {{ Form::text('description') }}
-                </div>
-                <div>
-                    @if ($errors->any())
-                        {{ $errors->first('description') }}
-                    @endif
-                </div>
+                    <div>
+                        {{ Form::label('description', __('layouts.labels.description')) }}
+                    </div>
+                    <div class="mt-2 text-black">
+                        {{ Form::text('description') }}
+                    </div>
+                    <div>
+                        @if ($errors->any())
+                            {{ $errors->first('description') }}
+                        @endif
+                    </div>
 
-                <div class="mt-2">
-                    {{ Form::submit(__('layouts.labels.update'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
+                    <div class="mt-2">
+                        {{ Form::submit(__('layouts.labels.update'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
+                    </div>
                 </div>
-                {{ Form::close() }}
-            </div>
+            {{ Form::close() }}
         </div>
     </div>
 </section>

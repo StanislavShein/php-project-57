@@ -5,11 +5,14 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\TaskStatus;
 use App\Models\User;
+use App\Models\Task;
 
 class TaskStatusesTest extends TestCase
 {
     private User $user;
     private TaskStatus $taskStatus;
+    private TaskStatus $associatedWithTaskStatus;
+    private Task $task;
     private array $data;
 
     protected function setUp(): void
@@ -18,6 +21,9 @@ class TaskStatusesTest extends TestCase
         $this->user = User::factory()->create();
         $this->data = TaskStatus::factory()->make()->only(['name']);
         $this->taskStatus = TaskStatus::factory()->create();
+        $this->task = Task::factory()->create();
+        $this->associatedWithTaskStatus = TaskStatus::factory()->create();
+        $this->associatedWithTaskStatus->tasks()->save($this->task);
     }
 
     public function testIndex(): void
@@ -93,5 +99,12 @@ class TaskStatusesTest extends TestCase
         $response->assertStatus(302);
 
         $this->assertDatabaseMissing('task_statuses', ['id' => $this->taskStatus->id]);
+    }
+
+    public function testForbiddenDestroyStatuslWithAssociatedTask(): void
+    {
+        $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $this->associatedWithTaskStatus));
+
+        $this->assertDatabaseHas('task_statuses', ['id' => $this->associatedWithTaskStatus->id]);
     }
 }

@@ -71,7 +71,7 @@ class LabelController extends Controller
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
-        if ($label->task()->exists()) {
+        if ($label->tasks()->exists()) {
             session()->flash('error', __('flash.labels.notdeleted'));
             return back();
         }

@@ -7,36 +7,36 @@
         <div class="grid col-span-full">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layouts.labels.create_header') }}</h1>
             {{ Form::model($label, ['url' => route('labels.store'), 'class' => 'w-50']) }}
-            <div class="flex flex-col dark:text-white">
-                <div>
-                    {{ Form::label('name', __('layouts.labels.name')) }}
-                </div>
-                <div class="mt-2 text-black">
-                    {{ Form::text('name', '', ['class' => 'form-control rounded border-gray-300 w-1/3']) }}
-                </div>
-                <div>
-                    @if ($errors->any())
-                        {{ $errors->first('name') }}
-                    @endif
-                </div>
+                <div class="flex flex-col dark:text-white">
+                    <div>
+                        {{ Form::label('name', __('layouts.labels.name')) }}
+                    </div>
+                    <div class="mt-2 text-black">
+                        {{ Form::text('name', '', ['class' => 'form-control rounded border-gray-300 w-1/3']) }}
+                    </div>
+                    <div>
+                        @if ($errors->any())
+                            {{ $errors->first('name') }}
+                        @endif
+                    </div>
 
-                <div>
-                    {{ Form::label('description', __('layouts.labels.description')) }}
-                </div>
-                <div class="mt-2 text-black">
-                    {{ Form::textarea('description', '', ['class' => 'form-control rounded border-gray-300 w-1/3 h-32', 'cols' => '50', 'rows' => '10']) }}
-                </div>
-                <div>
-                    @if ($errors->any())
-                        {{ $errors->first('description') }}
-                    @endif
-                </div>
+                    <div>
+                        {{ Form::label('description', __('layouts.labels.description')) }}
+                    </div>
+                    <div class="mt-2 text-black">
+                        {{ Form::textarea('description', '', ['class' => 'form-control rounded border-gray-300 w-1/3 h-32', 'cols' => '50', 'rows' => '10']) }}
+                    </div>
+                    <div>
+                        @if ($errors->any())
+                            {{ $errors->first('description') }}
+                        @endif
+                    </div>
 
-                <div class="mt-2">
-                    {{ Form::submit(__('layouts.labels.creating'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
+                    <div class="mt-2">
+                        {{ Form::submit(__('layouts.labels.creating'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
+                    </div>
                 </div>
-                {{ Form::close() }}
-            </div>
+            {{ Form::close() }}
         </div>
     </div>
 </section>

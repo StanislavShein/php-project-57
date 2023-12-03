@@ -99,7 +99,7 @@ class TaskController extends Controller
         $task->fill($data);
 
         if (array_key_exists('labels', $data)) {
-            $task->label()->attach($data['labels']);
+            $task->labels()->sync($data['labels']);
         }
 
         $task->save();
@@ -114,7 +114,7 @@ class TaskController extends Controller
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
-        $task->label()->detach();
+        $task->labels()->detach();
 
         $task->delete();
         session()->flash('success', __('flash.tasks.deleted'));

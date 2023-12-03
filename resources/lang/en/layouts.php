@@ -20,8 +20,10 @@ return [
         'confirm' => 'Are you sure?',
         'create_header' => 'Creating status',
         'create' => 'Create',
+        'creating' => 'Create',
         'edit_header' => 'Update status',
         'edit' => 'Update',
+        'update' => 'Update',
     ],
     'auth' => [
         'email' => 'Email',
@@ -31,6 +33,7 @@ return [
         'login' => 'Log in',
         'forgotmessage' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
         'resetpassword' => 'Email Password Reset Link',
+        'name' => 'Name',
         'confirmpass' => 'Confirmation',
         'alreadyreg' => 'Already registered?',
         'register' => 'Register',
@@ -53,6 +56,7 @@ return [
         'description' => 'Description',
         'labels' => 'Labels',
         'create' => 'Create',
+        'creating' => 'Create',
         'delete' => 'Delete',
         'confirm' => 'Are you sure?',
         'edit' => 'Update',
@@ -61,6 +65,8 @@ return [
         'placeholder_status' => '- Status -',
         'placeholder_created_by' => '- Creator -',
         'placeholder_assigned_to' => '- Executor -',
+        'update' => 'Update',
+        'apply' => 'Apply',
     ],
     'labels' => [
         'index_header' => 'Labels',
@@ -73,7 +79,9 @@ return [
         'delete' => 'Delete',
         'confirm' => 'Are you sure?',
         'edit' => 'Update',
+        'creating' => 'Create',
         'create_header' => 'Creating label',
         'edit_header' => 'Updating label',
+        'update' => 'Update',
     ]
 ];

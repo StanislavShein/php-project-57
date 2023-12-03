@@ -44,4 +44,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'created_by_id');
+    }
+
+    public function tasksAssign()
+    {
+        return $this->hasMany(Task::class, 'assigned_to_id');
+    }
+
+    public function labels()
+    {
+        return $this->hasMany(Label::class, 'created_by_id');
+    }
 }

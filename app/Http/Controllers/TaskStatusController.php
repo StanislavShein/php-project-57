@@ -67,7 +67,7 @@ class TaskStatusController extends Controller
             return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
         }
 
-        if ($taskStatus->task()->exists()) {
+        if ($taskStatus->tasks()->exists()) {
             session()->flash('error', __('flash.task_statuses.notdeleted'));
             return back();
         }
