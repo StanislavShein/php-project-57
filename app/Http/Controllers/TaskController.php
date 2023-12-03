@@ -62,7 +62,7 @@ class TaskController extends Controller
         $task->save();
 
         if (isset($data['labels'])) {
-            $task->label()->attach($data['labels']);
+            $task->labels()->attach($data['labels']);
         }
 
         session()->flash('success', __('flash.tasks.created'));
